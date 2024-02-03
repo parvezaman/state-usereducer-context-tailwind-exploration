@@ -6,9 +6,19 @@ const COUNTER_CONTEXT = createContext()
 const reducer = (state, action) => {
     switch (action.type) {
         case incType:
-            return { ...state, count: state.count + 1 }
+            if (state.count >= 0) {
+                return { ...state, count: state.count + 1 }
+            }
+            else {
+                return state
+            }
         case decType:
-            return { ...state, count: state.count - 1 }
+            if (state.count > 0) {
+                return { ...state, count: state.count - 1 }
+            }
+            else {
+                return state
+            }
         default:
             return state
     }
@@ -17,8 +27,9 @@ const reducer = (state, action) => {
 
 const CounterContextProvider = ({ children }) => {
     const [currentCount, setCurrentCount] = useState(0)
-    const [currentCountstate, dispatch] = useReducer(reducer, initialCounterState)
-    const providedValues = { currentCount, setCurrentCount, currentCountstate, dispatch }
+    const [currentCountState, dispatch] = useReducer(reducer, initialCounterState)
+
+    const providedValues = { currentCount, setCurrentCount, currentCountState, dispatch }
 
     return (<COUNTER_CONTEXT.Provider value={providedValues}>
         {children}

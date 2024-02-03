@@ -1,7 +1,7 @@
 import { UseCounterContext } from '../../context/countetContext'
 
 const Display = () => {
-    const { currentCount } = UseCounterContext()
+    const { currentCount, currentCountState } = UseCounterContext()
     return (
         <div className="flex w-full justify-evenly">
             <div>
@@ -15,7 +15,7 @@ const Display = () => {
                     useReducer
                 </h1>
                 <h1 className='text-blue-8xl'>
-                    {currentCount}
+                    {currentCountState.count}
                 </h1>
             </div>
         </div>
